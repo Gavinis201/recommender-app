@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Recommendation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+        }
+        input[type="number"] {
+            padding: 5px;
+            margin: 10px;
+        }
+        button {
+            padding: 5px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Item Recommendation System</h1>
+
+    <!-- Form to input itemID -->
+    <form action="/get_recommendations" method="get">
+        <label for="itemID">Enter Item ID (e.g., 8890720798209849691):</label><br>
+        <input type="number" id="itemID" name="itemID" required><br><br>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if collab_recs %}
+        <h2>Collaborative Filtering Recommendations:</h2>
+        <ul>
+            {% for rec in collab_recs %}
+                <li>{{ rec }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if content_recs %}
+        <h2>Content-Based Filtering Recommendations:</h2>
+        <ul>
+            {% for rec in content_recs %}
+                <li>{{ rec }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
